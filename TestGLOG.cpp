@@ -2,10 +2,22 @@
 //
 
 #include <iostream>
+#include "glog/logging.h"
 
-int main()
+int main(int argc, char* argv[])
 {
-    std::cout << "Hello World!\n";
+	google::InitGoogleLogging(argv[0]); //初始化 glog
+	int A = 90;
+	google::SetLogDestination(google::GLOG_INFO, "../TestGLOG/log/info");//info日志文件名开头
+	LOG(INFO) << "Hello, GOOGLE!";  // INFO 级别的日志
+	LOG(WARNING) << A;  // ERROR 级别的日志
+	LOG(ERROR) << "ERROR, GOOGLE!";  // ERROR 级别的日志
+	google::ShutdownGoogleLogging();
+	while (1)
+	{
+
+	}
+    //std::cout << "Hello World!\n";
 }
 
 // 运行程序: Ctrl + F5 或调试 >“开始执行(不调试)”菜单
