@@ -1,0 +1,7 @@
+Log file created at: 2021/06/20 22:50:23
+Running on machine: PC-HJH
+Running duration (h:mm:ss): 0:00:00
+Log line format: [IWEF]yyyymmdd hh:mm:ss.uuuuuu threadid file:line] msg
+I20210620 22:50:23.350282 24220 TestGLOG.cpp:32] Hello, GOOGLE!
+W20210620 22:50:23.351281 24220 TestGLOG.cpp:33] 90
+E20210620 22:50:23.351281 24220 TestGLOG.cpp:34] ERROR, GOOGLE!
