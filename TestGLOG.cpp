@@ -6,27 +6,40 @@
 
 int main(int argc, char* argv[])
 {
+	//初始化要打印日志的程序
 	google::InitGoogleLogging(argv[0]); //初始化 glog
-	int A = 90;
-	google::SetLogDestination(google::GLOG_INFO, "../TestGLOG/log/info");//info日志文件名开头
-	LOG(INFO) << "Hello, GOOGLE!";  // INFO 级别的日志
-	LOG(WARNING) << A;  // ERROR 级别的日志
-	LOG(ERROR) << "ERROR, GOOGLE!";  // ERROR 级别的日志
+
+	//打印到窗口
+	//FLAGS_logtostderr = google::ERROR;
+	//FLAGS_stderrthreshold = google::ERROR;
+	//FLAGS_alsologtostderr = google::ERROR;                   // 将实现日志信息输出到stderr，并且会记录到本地日志文件；
+	
+	//将日志文件输出到本地
+	//FLAGS_log_dir = "D:\\log";                      
+
+	//不同等级日志分开打印
+	google::SetLogDestination(google::GLOG_INFO, "./log/info");//编码时，vcxproj在的目录下，日志保存在log文件夹下，以info开头的文件下
+	google::SetLogDestination(google::GLOG_WARNING, "./log/war");
+	
+	google::SetLogDestination(google::GLOG_ERROR, "./LOG/err");//EXE目录下LOG文件夹下输出日志,error开头的文件
+	/********以exe所在的位置，使用时如此来切换日志打印的位置*******/
+	google::SetLogDestination(google::GLOG_FATAL, "../log/fat");//打日志到EXE所在的目录的上一级目录下得log文件下
+	//最大输出日志等级
+	FLAGS_minloglevel = google::GLOG_WARNING;                  //也会打印低等级的日志文件，只是里面没有低等级的日志输出，只有高等级的输出
+	                                                           //因为，glog默认在低等级的日志里面也打印高等级的错误。
+	//日志实时输出 
+	FLAGS_logbufsecs = 0;
+	//最大日志文件大小 10M
+	FLAGS_max_log_size = 10; 
+
+	int nTmp = 90;
+	LOG(INFO) << "Hello, GOOGLE!";  //自动换行
+	LOG(WARNING) << nTmp;
+	LOG(ERROR) << "ERROR, GOOGLE!";  
+	//LOG(FATAL) << "FATAL";
 	google::ShutdownGoogleLogging();
 	while (1)
 	{
 
 	}
-    //std::cout << "Hello World!\n";
 }
-
-// 运行程序: Ctrl + F5 或调试 >“开始执行(不调试)”菜单
-// 调试程序: F5 或调试 >“开始调试”菜单
-
-// 入门使用技巧: 
-//   1. 使用解决方案资源管理器窗口添加/管理文件
-//   2. 使用团队资源管理器窗口连接到源代码管理
-//   3. 使用输出窗口查看生成输出和其他消息
-//   4. 使用错误列表窗口查看错误
-//   5. 转到“项目”>“添加新项”以创建新的代码文件，或转到“项目”>“添加现有项”以将现有代码文件添加到项目
-//   6. 将来，若要再次打开此项目，请转到“文件”>“打开”>“项目”并选择 .sln 文件
